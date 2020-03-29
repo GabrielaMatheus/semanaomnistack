@@ -1,8 +1,9 @@
 const express=require('express'); //deu pra variavel express todas as informações da pasta express
-
-const app= express();
+const { errors } = require('celebrate');
 const cors=require('cors'); //para segurana do programa
 const routes = require ('./routes'); // './' para mostrar q é um arquivo da mesma pasta, sem ficaria pacote
+const app= express();
+
 app.get('/',(request,response)=>{
     response.send("Rodou")
 });
@@ -10,8 +11,6 @@ app.get('/',(request,response)=>{
 app.use(cors()); 
 app.use(express.json());
 app.use(routes);
+app.use(errors());
 
-
-app.listen(3333,()=> {
-    console.log("servidor online")
-}); //essa variavel ouve por 3333
+module.exports =app;

@@ -1,5 +1,6 @@
-const crypto= require('crypto'); //para criptografia, tbm pode ser usado pra gerar caracteres aleatórios
+
 const connection=require('../database/connection'); //importação do banco de dados
+const generateUniqueId = require ('../utils/generateUniqueId');
 
 module.exports={
     async index (request,response) {
@@ -10,7 +11,9 @@ module.exports={
 
     async create(request,response){
         const {name, email, whatsapp, city, uf}= request.body; //requisição do corpo
-    const id =crypto.randomBytes(4).toString('HEX'); //a variavel crypto vai pegar 4 caracteres aleatorios e convertelos em string hexadecimal. 
+    const id = generateUniqueId (); 
+
+
      
     await connection('ongs').insert({ //comando insert é para inserir dados ali dentro
         id,
